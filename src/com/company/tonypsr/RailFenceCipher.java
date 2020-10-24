@@ -1,6 +1,7 @@
 package com.company.tonypsr;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class RailFenceCipher {
     public static String encrypt(char[] plainText, int n){
@@ -72,7 +73,6 @@ public class RailFenceCipher {
                     x++;
                 }
             }
-            System.out.println();
         }
 
         System.out.println("Decryption Rails:");
@@ -101,8 +101,12 @@ public class RailFenceCipher {
     }
 
     public static void main(String[] args) {
-        char[] message = "ABCDEFGHIJKLMNO".toCharArray();
-        int n = 4;
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the message: ");
+        char[] message = sc.nextLine().toCharArray();
+        System.out.println("Enter the no. of rails: ");
+        int n = sc.nextInt();
 
         String cipherText = encrypt(message, n);
         System.out.println("Cipher Text: " + cipherText);
