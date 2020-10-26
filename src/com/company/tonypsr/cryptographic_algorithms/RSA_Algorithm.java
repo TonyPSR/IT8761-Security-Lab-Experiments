@@ -3,7 +3,7 @@ package com.company.tonypsr.cryptographic_algorithms;
 import java.util.Random;
 import java.util.Scanner;
 
-public class RSAAlgorithm {
+public class RSA_Algorithm {
 
     public static boolean isPrime(int num) {
         for (int i = 2; i < num / 2; i++) {

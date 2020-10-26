@@ -3,7 +3,7 @@ package com.company.tonypsr.cryptographic_algorithms;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class DiffieHellmanAlgorithm {
+public class DiffieHellman_Algorithm {
 
     //findExponentialModulo() - fast exponentiation recursive algorithm
     public static long findExponentialModulo(long a, long N, long M) {
