@@ -1,64 +1,103 @@
 package com.company.tonypsr.cryptographic_algorithms;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class RSAAlgorithm {
 
-    // Returns gcd of a and b
-    public static int gcd(int a, int h)
-    {
-        int temp;
-        while (true)
-        {
-            temp = a%h;
-            if (temp == 0)
-                return h;
-            a = h;
-            h = temp;
+    public static boolean isPrime(int num) {
+        for (int i = 2; i < num / 2; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static int generateNthPrime(int n) {
+        int count = 0;
+
+        int result = -1;
+        for (int i = 2; count <= n; i++) {
+            if (isPrime(i)) {
+                result = i;
+                count++;
+            }
+        }
+
+        return result;
+    }
+
+    //findExponentialModulo() - fast exponentiation recursive algorithm
+    public static long findExponentialModulo(long a, long N, long M) {
+        if (N == 0) {
+            return 1;
+        } else {
+            final long R = findExponentialModulo(a, N / 2, M);
+            if (N % 2 == 0) {
+                return (R * R) % M;
+            } else {
+                return (R * R * a) % M;
+            }
+        }
+    }
+
+
+    public static int gcd(int num1, int num2) {
+        int c;
+        while (true) {
+            c = num1 % num2;
+            if (c == 0)
+                return num2;
+            num1 = num2;
+            num2 = c;
         }
     }
 
     public static void main(String[] args) {
-        // Two random prime numbers
-        double p = 13;
-        double q = 11;
+        Random rand = new Random();
+        Scanner sc = new Scanner(System.in);
 
-        // First part of public key:
-        double n = p*q;
+        //STEP 1
+        // Two unique random prime numbers
+        // lower bound 98
+        int p = generateNthPrime(rand.nextInt(100) + 99);
+        int q = generateNthPrime(rand.nextInt(100) + 98);
 
-        // Finding other part of public key.
-        // e stands for encrypt
-        double e = 2;
-        double phi = (p-1)*(q-1);
-        while (e < phi)
-        {
-            // e must be co-prime to phi and
-            // smaller than phi.
-            if (gcd((int)e, (int)phi)==1)
+        //STEP 2
+        long n = p * q;
+
+        //STEP 3
+        long phi = (p - 1) * (q - 1);
+
+        //STEP 4
+        long e = 2;
+        while (e < phi) {
+            if (gcd((int) e, (int) phi) == 1)
                 break;
             else
                 e++;
         }
 
-        // Private key (d stands for decrypt)
-        // choosing d such that it satisfies
-        // d*e = 1 + k * totient
-        int k = 1;  // A constant value
-        double d = (1 + (k*phi))/e;
-        System.out.println("D: " + d);
+        //STEP 5
+        long d = 0;
+        while ((d * e) % phi != 1) {
+            d++;
+        }
 
-        // Message to be encrypted
-        double msg = 9;
+        // get the message from the user
+        System.out.println("Enter the message to send: (0-99999)");
+        long plainText = sc.nextLong();
 
-        System.out.println("Message data = " + msg);
+        System.out.println();
 
-        // Encryption c = (msg ^ e) % n
-        double c = Math.pow(msg, e) % n;
+        // encryption {e,n}
+        long cipherText = findExponentialModulo(plainText, e, n);
+        System.out.println("->Cipher Text: " + cipherText);
 
-
-        System.out.println("Encrypted data = " + c);
-
-        // Decryption m = (c ^ d) % n
-        double m = Math.pow(c, d) %n;
-        System.out.println("Original Message Sent = " + m);
-
+        // decryption {d,n}
+        long m = findExponentialModulo(cipherText, d, n);
+        System.out.println("->Plain Text: " + m);
     }
 }
