@@ -1,4 +1,4 @@
-package com.company.tonypsr;
+package com.company.tonypsr.substitution_and_transposition_ciphers;
 
 import java.util.Scanner;
 
