@@ -13,6 +13,7 @@ public class PlayFairCipher {
             keySet.add(letter);
         }
 
+
         // for avoiding repetition
         HashSet<Character> letterSet = new HashSet<>();
 
@@ -28,7 +29,7 @@ public class PlayFairCipher {
                 col = 0;
             }
 
-            if('a'+i == 'j'){
+            if(key.charAt(i) == 'j'){
                 continue;
             }
 
@@ -69,13 +70,20 @@ public class PlayFairCipher {
 
     public static ArrayList<String> splitMessage(String message){
         ArrayList<String> splittedMessage = new ArrayList<>();
-        int x=0;
-        for(int i=0; i<message.length()-1; i+=2, x++){
-            splittedMessage.add(message.charAt(i) + "" + message.charAt(i+1));
+
+        int duplicates=0;
+        for(int i=0; i<message.length()-1; i+=2){
+            if((message.charAt(i) != message.charAt(i+1))){
+                splittedMessage.add(message.charAt(i) + "" + message.charAt(i+1));
+            } else if(!(message.charAt(i) == 'x' && message.charAt(i) == message.charAt(i))) {
+                splittedMessage.add(message.charAt(i) + "" + 'x');
+                i-=1;
+                duplicates+=1;
+            }
         }
         // if length of key is odd
-        if(message.length()%2 != 0) {
-            splittedMessage.add("" + message.charAt(message.length() - 1) + "z");
+        if((message.length() + duplicates )%2 != 0) {
+            splittedMessage.add("" + message.charAt(message.length() - 1) + "x");
         }
 
         return splittedMessage;
@@ -95,6 +103,7 @@ public class PlayFairCipher {
             int[] firstLetterIndex = new int [2];
             int[] secondLetterIndex = new int[2];
 
+
             for(int i=0; i<5; i++){
                 for(int j=0; j<5; j++){
                     if(keyTable[i][j] == firstLetter){
@@ -109,7 +118,10 @@ public class PlayFairCipher {
 
             //Cases
             // same row, same column, diff row and column
-            if(firstLetterIndex[0] == secondLetterIndex[0]){
+            if(firstLetter == secondLetter){
+                cipherText.append(keyTable[firstLetterIndex[0]][(firstLetterIndex[1] + 1) % 5])
+                        .append(keyTable[firstLetterIndex[0]][(firstLetterIndex[1] + 1) % 5]);
+            }else if(firstLetterIndex[0] == secondLetterIndex[0]){
                 cipherText.append(keyTable[firstLetterIndex[0]][(firstLetterIndex[1] + 1) % 5])
                         .append(keyTable[secondLetterIndex[0]][(secondLetterIndex[1] + 1) % 5]);
             } else if (firstLetterIndex[1] == secondLetterIndex[1]){
@@ -173,7 +185,7 @@ public class PlayFairCipher {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter the message (lowercase only):");
-        String message = sc.next().toLowerCase();
+        String message = sc.next().toLowerCase().replaceAll("j","i");
         System.out.println("Enter the key:");
         // replace all j with i
         String key = sc.next().toLowerCase().replaceAll("j","i");
@@ -182,7 +194,5 @@ public class PlayFairCipher {
         System.out.println("Cipher Text: " + cipherText);
         String plainText = decrypt(cipherText, key);
         System.out.println("Plain Text: " + plainText);
-
-
     }
 }

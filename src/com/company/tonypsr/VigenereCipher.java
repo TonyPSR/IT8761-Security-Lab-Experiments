@@ -47,7 +47,7 @@ public class VigenereCipher {
                 }
             }
 
-            plainText.append(table[row][col]);
+            plainText.append((char)(col + 65));
         }
 
         return plainText.toString();
@@ -63,8 +63,9 @@ public class VigenereCipher {
 
         String cipherText = encrypt(message.toCharArray(), key.toCharArray());
         System.out.println("Cipher Text: " + cipherText);
-        String plainText = decrypt(message.toCharArray(), key.toCharArray());
+        String plainText = decrypt(cipherText.toCharArray(), key.toCharArray());
         System.out.println("Plain Text: " + plainText);
 
     }
+
 }
