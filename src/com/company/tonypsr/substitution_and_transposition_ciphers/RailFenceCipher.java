@@ -28,14 +28,14 @@ public class RailFenceCipher {
             col += 1;
         }
 
-        System.out.println("Encryption Rails:");
+        //Uncomment the below 2 commented lines to view the rails
         for(int i=0; i<rails.length; i++){
             for(int j=0; j<rails[0].length; j++){
-                System.out.print(rails[i][j] + " ");
+//                System.out.print(rails[i][j] + " ");
                 if(rails[i][j]!='#')
                     cipherText.append(rails[i][j]);
             }
-            System.out.println();
+//            System.out.println();
         }
 
 
@@ -75,12 +75,13 @@ public class RailFenceCipher {
             }
         }
 
-        System.out.println("Decryption Rails:");
+        //Uncomment the below 2 commented lines to view the rails
+//        System.out.println("Decryption Rails:");
         for(int i=0; i<rails.length; i++){
             for(int j=0; j<rails[0].length; j++){
-                System.out.print(rails[i][j] + " ");
+//                System.out.print(rails[i][j] + " ");
             }
-            System.out.println();
+//            System.out.println();
         }
 
         row = 0;
@@ -108,10 +109,10 @@ public class RailFenceCipher {
         System.out.println("Enter the no. of rails: ");
         int n = sc.nextInt();
 
+        System.out.println();
+
         String cipherText = encrypt(message, n);
         System.out.println("Cipher Text: " + cipherText);
-
-        System.out.println();
 
         String plainText = decrypt(cipherText.toCharArray(), n);
         System.out.println("Plain Text: " + plainText);
