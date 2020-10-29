@@ -7,24 +7,24 @@ import java.util.Scanner;
 
 public class HillCipher {
 
-    public static ArrayList<String> splitMessage(String message, int splitBy){
+    public static ArrayList<String> splitMessage(String message, int splitBy) {
         ArrayList<String> splittedMessage = new ArrayList<>();
 
-        for(int i=0; i<message.length()-splitBy+1; i+=splitBy){
-            splittedMessage.add(message.substring(i, i+splitBy));
+        for (int i = 0; i < message.length() - splitBy + 1; i += splitBy) {
+            splittedMessage.add(message.substring(i, i + splitBy));
         }
 
         return splittedMessage;
     }
 
 
-    public static int[][] multiply(int[][] a, int[][] b){
+    public static int[][] multiply(int[][] a, int[][] b) {
         int[][] c = new int[a.length][b[0].length];
 
-        for(int i=0; i<a.length; i++){
-            for(int j=0; j<b[0].length; j++){
-                for(int k=0; k<b.length; k++){
-                    c[i][j] += (a[i][k]*b[k][j]);
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                for (int k = 0; k < b.length; k++) {
+                    c[i][j] += (a[i][k] * b[k][j]);
                 }
             }
         }
@@ -32,27 +32,27 @@ public class HillCipher {
         return c;
     }
 
-    public static int[][] stringToColumnVector(String text){
+    public static int[][] stringToColumnVector(String text) {
         int[][] colVector = new int[text.length()][1];
 
-        for(int i=0; i<text.length(); i++){
+        for (int i = 0; i < text.length(); i++) {
             colVector[i][0] = text.charAt(i) - 'a';
         }
 
         return colVector;
     }
 
-    public static String encrypt(String plainText, int[][] key){
+    public static String encrypt(String plainText, int[][] key) {
         StringBuilder cipherText = new StringBuilder();
 
         ArrayList<String> messageSplit = splitMessage(plainText, key.length);
 
 
-        for(String letterPair: messageSplit){
+        for (String letterPair : messageSplit) {
             int[][] cipherBlock = multiply(key, stringToColumnVector(letterPair));
 
-            for(int i=0; i<cipherBlock.length; i++){
-                cipherText.append((char)(cipherBlock[i][0]%26+'a'));
+            for (int i = 0; i < cipherBlock.length; i++) {
+                cipherText.append((char) (cipherBlock[i][0] % 26 + 'a'));
             }
         }
 
@@ -60,37 +60,37 @@ public class HillCipher {
     }
 
 
-    public static String decrypt(String cipherText, int[][] key){
+    public static String decrypt(String cipherText, int[][] key) {
         StringBuilder plainText = new StringBuilder();
 
         ArrayList<String> messageSplit = splitMessage(cipherText, key.length);
 
-        for(String letterPair: messageSplit){
+        for (String letterPair : messageSplit) {
             int[][] adjMatrix = adj(key);
             int determinant = determinant(key, key.length);
 
-            if(determinant == 0){
+            if (determinant == 0) {
                 System.out.println("Key not valid");
             }
 
             int[][] c = multiply(adjMatrix, stringToColumnVector(letterPair));
 
             //prelims check
-            if (gcd(determinant, 26) != 1){
+            if (gcd(determinant, 26) != 1) {
                 System.out.println("Key doesn't have a modular inverse, try another key");
                 System.exit(0);
             }
 
             //finding suitable k such that
             // (det*k)mod26 === 1
-            int k=1;
-            while((determinant*k)%26 != 1){
+            int k = 1;
+            while ((determinant * k) % 26 != 1) {
                 k++;
             }
 
-            for(int i=0; i<c.length; i++){
+            for (int i = 0; i < c.length; i++) {
                 c[i][0] *= k;
-                plainText.append((char)(c[i][0]%26+'a'));
+                plainText.append((char) (c[i][0] % 26 + 'a'));
             }
 
         }
@@ -115,8 +115,7 @@ public class HillCipher {
                 if (row != p && col != q) {
                     temp[i][j++] = A[row][col];
 
-                    if (j == n - 1)
-                    {
+                    if (j == n - 1) {
                         j = 0;
                         i++;
                     }
@@ -154,28 +153,28 @@ public class HillCipher {
         }
 
         int sign = 1;
-        int [][]temp = new int[A.length][A.length];
+        int[][] temp = new int[A.length][A.length];
 
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A.length; j++) {
                 getCofactor(A, temp, i, j, A.length);
-                sign = ((i + j) % 2 == 0)? 1: -1;
-                adj[j][i] = (sign)*(determinant(temp, A.length-1));
+                sign = ((i + j) % 2 == 0) ? 1 : -1;
+                adj[j][i] = (sign) * (determinant(temp, A.length - 1));
             }
         }
 
         return adj;
     }
 
-    public static int[][] stringToIntArray(String message){
+    public static int[][] stringToIntArray(String message) {
         int n = (int) Math.sqrt(message.length());
         int[][] key = new int[n][n];
 
         int stringPtr = 0;
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 key[i][j] = message.charAt(stringPtr) - 'a';
-                stringPtr+=1;
+                stringPtr += 1;
             }
         }
 
@@ -193,7 +192,7 @@ public class HillCipher {
 
         System.out.println("1. Enter key as String\n2. Enter key as 2D Matrix");
         int choice = sc.nextInt();
-        if(choice==1) {
+        if (choice == 1) {
             System.out.println("Enter the key: (length: 4, 9, etc...)");
             String keyString = sc.next().toLowerCase();
 
@@ -203,14 +202,14 @@ public class HillCipher {
             }
 
             key = stringToIntArray(keyString);
-        } else if (choice == 2){
+        } else if (choice == 2) {
             System.out.println("Enter Matrix Order: ");
             int order = sc.nextInt();
             key = new int[order][order];
 
-            for(int i=0; i<order; i++){
-                for(int j=0; j<order; j++){
-                    System.out.println("Enter Matrix["+i+"]["+j+"]: ");
+            for (int i = 0; i < order; i++) {
+                for (int j = 0; j < order; j++) {
+                    System.out.println("Enter Matrix[" + i + "][" + j + "]: ");
                     key[i][j] = sc.nextInt();
                 }
             }
