@@ -69,8 +69,17 @@ public class HillCipher {
             int[][] adjMatrix = adj(key);
             int determinant = determinant(key, key.length);
 
+            if(determinant == 0){
+                System.out.println("Key not valid");
+            }
+
             int[][] c = multiply(adjMatrix, stringToColumnVector(letterPair));
 
+            //prelims check
+            if (gcd(determinant, 26) != 1){
+                System.out.println("Key doesn't have a modular inverse, try another key");
+                System.exit(0);
+            }
 
             //finding suitable k such that
             // (det*k)mod26 === 1
@@ -89,6 +98,13 @@ public class HillCipher {
         return plainText.toString();
     }
 
+
+    static int gcd(int n1, int n2) {
+        if (n2 != 0)
+            return gcd(n2, n1 % n2);
+        else
+            return n1;
+    }
 
     static void getCofactor(int[][] A, int[][] temp, int p, int q, int n) {
 
@@ -109,8 +125,7 @@ public class HillCipher {
         }
     }
 
-    static int determinant(int[][] A, int n)
-    {
+    static int determinant(int[][] A, int n) {
         int result = 0;
 
         if (n == 1)
@@ -131,11 +146,9 @@ public class HillCipher {
     }
 
 
-    static int[][] adj(int A[][])
-    {
+    static int[][] adj(int A[][]) {
         int[][] adj = new int[A.length][A.length];
-        if (A.length == 1)
-        {
+        if (A.length == 1) {
             adj[0][0] = 1;
             return adj;
         }
@@ -143,14 +156,10 @@ public class HillCipher {
         int sign = 1;
         int [][]temp = new int[A.length][A.length];
 
-        for (int i = 0; i < A.length; i++)
-        {
-            for (int j = 0; j < A.length; j++)
-            {
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A.length; j++) {
                 getCofactor(A, temp, i, j, A.length);
-
                 sign = ((i + j) % 2 == 0)? 1: -1;
-
                 adj[j][i] = (sign)*(determinant(temp, A.length-1));
             }
         }
@@ -165,7 +174,7 @@ public class HillCipher {
         int stringPtr = 0;
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
-                key[i][j] = message.charAt(stringPtr);
+                key[i][j] = message.charAt(stringPtr) - 'a';
                 stringPtr+=1;
             }
         }
@@ -180,10 +189,34 @@ public class HillCipher {
         System.out.println("Enter the message: ");
         String message = sc.next().toLowerCase();
 
-        System.out.println("Enter the key: (length: 4, 9, etc...)");
-        String keyString = sc.next().toLowerCase();
+        int[][] key = null;
 
-        int[][] key = stringToIntArray(keyString);
+        System.out.println("1. Enter key as String\n2. Enter key as 2D Matrix");
+        int choice = sc.nextInt();
+        if(choice==1) {
+            System.out.println("Enter the key: (length: 4, 9, etc...)");
+            String keyString = sc.next().toLowerCase();
+
+            if (Math.sqrt(keyString.length()) != Math.round(Math.sqrt(keyString.length()))) {
+                System.out.println("Invalid key length");
+                System.exit(0);
+            }
+
+            key = stringToIntArray(keyString);
+        } else if (choice == 2){
+            System.out.println("Enter Matrix Order: ");
+            int order = sc.nextInt();
+            key = new int[order][order];
+
+            for(int i=0; i<order; i++){
+                for(int j=0; j<order; j++){
+                    System.out.println("Enter Matrix["+i+"]["+j+"]: ");
+                    key[i][j] = sc.nextInt();
+                }
+            }
+        } else {
+            System.out.println("Invalid choice");
+        }
 
         String cipherText = encrypt(message, key);
         System.out.println("Cipher Text: " + cipherText);
