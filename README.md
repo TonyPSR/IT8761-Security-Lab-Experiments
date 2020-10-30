@@ -13,6 +13,7 @@
 ![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/PlayFair%20Cipher.png?raw=true)
 
 #### Hill Cipher
+Note: Hill Cipher decryption fails for edge cases in this implementation. Requires additional bug fixes.
 
 ###### String Key
 ![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/Hill%20Cipher%201.png?raw=true)
