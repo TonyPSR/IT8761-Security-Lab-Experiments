@@ -66,6 +66,10 @@ public class RSA_Algorithm {
         // lower bound 98
         int p = generateNthPrime(rand.nextInt(100) + 99);
         int q = generateNthPrime(rand.nextInt(100) + 98);
+        // make sure p and q are not the same
+        while(p == q){
+            q = generateNthPrime(rand.nextInt(100) + 98);
+        }
 
         //STEP 2
         long n = p * q;
@@ -94,12 +98,23 @@ public class RSA_Algorithm {
 
         System.out.println();
 
+        System.out.println("Computed Values:");
+        System.out.println("p = " + p);
+        System.out.println("q = " + q);
+        System.out.println("n = p*q = " + n);
+        System.out.println("phi = (p-1)*(q-1) = " + phi);
+        System.out.println();
+        System.out.println("e = " + e);
+        System.out.println("d = " + d);
+
+        System.out.println();
+
         // encryption {e,n}
         long cipherText = findExponentialModulo(plainText, e, n);
-        System.out.println("->Cipher Text: " + cipherText);
+        System.out.println("->Cipher Text {e,n}: " + cipherText);
 
         // decryption {d,n}
         long m = findExponentialModulo(cipherText, d, n);
-        System.out.println("->Plain Text: " + m);
+        System.out.println("->Plain Text {d,n}: " + m);
     }
 }
