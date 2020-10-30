@@ -203,7 +203,7 @@ public class HillCipher {
 
         int[][] key = null;
 
-        System.out.println("1. Enter key as String\n2. Enter key as 2D Matrix");
+        System.out.println("1. Enter key as String\n2. Enter key as Matrix (2D Array)");
         int choice = sc.nextInt();
         if (choice == 1) {
             System.out.println("Enter the key: (length: 4, 9, etc...) (a-z)");
@@ -222,9 +222,11 @@ public class HillCipher {
             int order = sc.nextInt();
             key = new int[order][order];
 
+            System.out.println("\nEnter numbers:");
+
             for (int i = 0; i < order; i++) {
                 for (int j = 0; j < order; j++) {
-                    System.out.println("Enter Matrix[" + i + "][" + j + "]: ");
+                    System.out.println("Enter Matrix[" + (i+1) + "][" + (j+1) + "]: ");
                     key[i][j] = sc.nextInt();
                 }
             }
