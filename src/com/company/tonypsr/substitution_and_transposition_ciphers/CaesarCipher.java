@@ -38,11 +38,15 @@ public class CaesarCipher {
         char[] message;
         int n;
 
+        System.out.println("\nCaesar Cipher\n");
+
         //creating char array from string input
         System.out.println("Enter the message: ");
         message = sc.nextLine().toCharArray();
-        System.out.println("Enter the value of n: ");
+        System.out.println("Enter the value of n: (number)");
         n = sc.nextInt();
+
+        System.out.println();
 
         //encryption - input plain text
         String cipherText = String.valueOf(encrypt(message, n));

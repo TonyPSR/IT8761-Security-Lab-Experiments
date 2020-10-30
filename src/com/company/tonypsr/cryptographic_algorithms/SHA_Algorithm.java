@@ -34,8 +34,10 @@ public class SHA_Algorithm {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nSHA-1 Algorithm\n");
+
         System.out.println("Enter the message: ");
-        String message = sc.next();
+        String message = sc.nextLine();
 
         System.out.println("\n->SHA HashCode: " + generateSHA1HashCode(message));
     }

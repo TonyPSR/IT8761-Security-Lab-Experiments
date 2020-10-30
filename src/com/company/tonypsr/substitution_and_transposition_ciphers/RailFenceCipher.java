@@ -104,9 +104,11 @@ public class RailFenceCipher {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nRail Fence Cipher\n");
+
         System.out.println("Enter the message: ");
         char[] message = sc.nextLine().toCharArray();
-        System.out.println("Enter the no. of rails: ");
+        System.out.println("Enter the no. of rails: (less than the length of the message)");
         int n = sc.nextInt();
 
         System.out.println();

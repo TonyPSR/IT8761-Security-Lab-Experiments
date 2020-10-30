@@ -59,6 +59,8 @@ public class RSA_Algorithm {
         Random rand = new Random();
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nRSA Algorithm\n");
+
         //STEP 1
         // Two unique random prime numbers
         // lower bound 98

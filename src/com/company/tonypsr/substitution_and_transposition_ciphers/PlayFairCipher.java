@@ -58,13 +58,6 @@ public class PlayFairCipher {
             }
         }
 
-        for(int i=0; i<5; i++) {
-            for(int j=0; j<5; j++) {
-                System.out.print(keyTable[i][j] + " ");
-            }
-            System.out.println();
-        }
-
         return keyTable;
     }
 
@@ -94,8 +87,6 @@ public class PlayFairCipher {
         char[][] keyTable = generateAndGetKeySquare(key);
 
         ArrayList<String> splittedPlainText = splitMessage(plainText);
-
-        System.out.println(splittedPlainText);
 
         for(String letterPair: splittedPlainText){
             char firstLetter = letterPair.charAt(0)=='j'?'i':letterPair.charAt(0);
@@ -143,8 +134,6 @@ public class PlayFairCipher {
 
         ArrayList<String> splittedPlainText = splitMessage(cipherText);
 
-        System.out.println(splittedPlainText);
-
         for(String letterPair: splittedPlainText){
             char firstLetter = letterPair.charAt(0)=='j'?'i':letterPair.charAt(0);
             char secondLetter = letterPair.charAt(1)=='j'?'i':letterPair.charAt(1);
@@ -184,11 +173,16 @@ public class PlayFairCipher {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter the message (lowercase only):");
+        System.out.println("\nPlayFair Cipher\n");
+
+        System.out.println("Enter the message (lowercase only without space):");
         String message = sc.next().toLowerCase().replaceAll("j","i");
-        System.out.println("Enter the key:");
+        System.out.println("Enter the key: (a-z)");
         // replace all j with i
         String key = sc.next().toLowerCase().replaceAll("j","i");
+
+
+        System.out.println();
 
         String cipherText = encrypt(message, key);
         System.out.println("Cipher Text: " + cipherText);

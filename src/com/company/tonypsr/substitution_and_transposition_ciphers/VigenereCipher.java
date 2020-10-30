@@ -56,10 +56,14 @@ public class VigenereCipher {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter the message (without spaces):");
+        System.out.println("\nVigenere Cipher\n");
+
+        System.out.println("Enter the message (Uppercase, without spaces):");
         String message = sc.next().toUpperCase();
-        System.out.println("Enter the key:");
+        System.out.println("Enter the key: (A-Z)");
         String key = sc.next().toUpperCase();
+
+        System.out.println();
 
         String cipherText = encrypt(message.toCharArray(), key.toCharArray());
         System.out.println("Cipher Text: " + cipherText);
@@ -67,5 +71,4 @@ public class VigenereCipher {
         System.out.println("Plain Text: " + plainText);
 
     }
-
 }

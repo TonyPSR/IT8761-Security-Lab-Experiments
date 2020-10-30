@@ -1,7 +1,5 @@
 package com.company.tonypsr.substitution_and_transposition_ciphers;
 
-import javax.swing.plaf.metal.MetalTheme;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -48,38 +46,49 @@ public class HillCipher {
         ArrayList<String> messageSplit = splitMessage(plainText, key.length);
 
 
-        for (String letterPair : messageSplit) {
-            int[][] cipherBlock = multiply(key, stringToColumnVector(letterPair));
+        for (String textBlock : messageSplit) {
+            int[][] c = multiply(key, stringToColumnVector(textBlock));
 
-            for (int i = 0; i < cipherBlock.length; i++) {
-                cipherText.append((char) (cipherBlock[i][0] % 26 + 'a'));
+            for (int i = 0; i < c.length; i++) {
+                cipherText.append((char) (c[i][0] % 26 + 'a'));
             }
         }
 
         return cipherText.toString();
     }
 
+    public static boolean isValidKey(int[][] key){
+        int determinant = determinant(key, key.length);
+
+        if (determinant == 0) {
+            System.out.println("Key can't be inverted, determinant 0. Try another key");
+            return false;
+        }
+
+        //prelims check
+        if (Math.abs(gcd(determinant, 26)) != 1) {
+            System.out.println("Key doesn't have a modular inverse, try another key");
+            return false;
+        }
+
+        return true;
+    }
 
     public static String decrypt(String cipherText, int[][] key) {
         StringBuilder plainText = new StringBuilder();
 
         ArrayList<String> messageSplit = splitMessage(cipherText, key.length);
 
-        for (String letterPair : messageSplit) {
+        for (String textBlock : messageSplit) {
             int[][] adjMatrix = adj(key);
             int determinant = determinant(key, key.length);
 
-            if (determinant == 0) {
-                System.out.println("Key not valid");
-            }
-
-            int[][] c = multiply(adjMatrix, stringToColumnVector(letterPair));
-
-            //prelims check
-            if (gcd(determinant, 26) != 1) {
-                System.out.println("Key doesn't have a modular inverse, try another key");
+            if(!isValidKey(key)){
                 System.exit(0);
             }
+
+
+            int[][] c = multiply(adjMatrix, stringToColumnVector(textBlock));
 
             //finding suitable k such that
             // (det*k)mod26 === 1
@@ -90,7 +99,7 @@ public class HillCipher {
 
             for (int i = 0; i < c.length; i++) {
                 c[i][0] *= k;
-                plainText.append((char) (c[i][0] % 26 + 'a'));
+                plainText.append((char) (Math.abs(c[i][0]) % 26 + 'a'));
             }
 
         }
@@ -137,7 +146,6 @@ public class HillCipher {
         for (int f = 0; f < n; f++) {
             getCofactor(A, temp, 0, f, n);
             result += sign * A[0][f] * determinant(temp, n - 1);
-
             sign = -sign;
         }
 
@@ -183,9 +191,14 @@ public class HillCipher {
 
 
     public static void main(String[] args) {
+        /* May fail for edge cases */
+        /* Additional testing required */
+
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter the message: ");
+        System.out.println("\nHill Cipher\n");
+
+        System.out.println("Enter the message: (lowercase without spaces)");
         String message = sc.next().toLowerCase();
 
         int[][] key = null;
@@ -193,15 +206,17 @@ public class HillCipher {
         System.out.println("1. Enter key as String\n2. Enter key as 2D Matrix");
         int choice = sc.nextInt();
         if (choice == 1) {
-            System.out.println("Enter the key: (length: 4, 9, etc...)");
+            System.out.println("Enter the key: (length: 4, 9, etc...) (a-z)");
             String keyString = sc.next().toLowerCase();
 
+            // if length of the key is not a square of an integer.
             if (Math.sqrt(keyString.length()) != Math.round(Math.sqrt(keyString.length()))) {
                 System.out.println("Invalid key length");
                 System.exit(0);
             }
 
             key = stringToIntArray(keyString);
+
         } else if (choice == 2) {
             System.out.println("Enter Matrix Order: ");
             int order = sc.nextInt();

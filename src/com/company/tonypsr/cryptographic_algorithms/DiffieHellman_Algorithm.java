@@ -65,6 +65,8 @@ public class DiffieHellman_Algorithm {
             kb = secret key of B
          */
 
+        System.out.println("\nDiffie–Hellman Key Exchange Algorithm\n");
+
         System.out.println("Enter value of q (PRIME): ");
         q = sc.nextInt();
 

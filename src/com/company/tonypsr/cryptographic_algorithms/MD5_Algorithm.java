@@ -23,7 +23,7 @@ public class MD5_Algorithm {
             hashCode = new StringBuilder(temp.toString(16));
 
             while (hashCode.length() < 32) {
-                hashCode.append("0");
+                hashCode.insert(0, "0");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,8 +35,10 @@ public class MD5_Algorithm {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nMD5 Algorithm\n");
+
         System.out.println("Enter the message: ");
-        String message = sc.next();
+        String message = sc.nextLine();
 
         System.out.println("\n->MD5 HashCode: " + generateMD5HashCode(message));
     }
