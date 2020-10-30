@@ -234,6 +234,8 @@ public class HillCipher {
             System.out.println("Invalid choice");
         }
 
+        System.out.println();
+
         String cipherText = encrypt(message, key);
         System.out.println("Cipher Text: " + cipherText);
 
