@@ -50,5 +50,5 @@ Note: Hill Cipher decryption fails for edge cases in this implementation. Requir
 ![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
 
 
-### Note: If you are executing the programs separately, remove the first statement in the .java file as follows.
-#### ~~package com.company.xyz.abc;~~
+### Note: If you are executing the programs separately, remove the first statement in the java file.
+##### ~~package com.company.xyz.abc;~~
