@@ -16,7 +16,7 @@ public class SHA_Algorithm {
             messageBytes = messageDigest.digest(input.getBytes());
 
             temp = new BigInteger(1, messageBytes);
-
+            
             messageDigest.update(messageBytes);
 
             hashCode = new StringBuilder(temp.toString(16));
