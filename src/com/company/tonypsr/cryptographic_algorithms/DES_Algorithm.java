@@ -33,19 +33,15 @@ public class DES_Algorithm {
 
     public static void main(String[] argv) {
         try {
-
             SecretKey key = KeyGenerator.getInstance("DES").generateKey();
             initSecretKey(key);
 
             Scanner sc = new Scanner(System.in);
 
             System.out.println("\nDES Algorithm\n");
-
-
             System.out.println("Enter the message: (A-Z, a-z, 0-9)");
             String message;
             message = sc.nextLine();
-
 
             String encryptedString = "";
             String decryptedString = "";
