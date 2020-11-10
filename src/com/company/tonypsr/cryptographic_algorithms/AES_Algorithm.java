@@ -30,9 +30,9 @@ public class AES_Algorithm {
 
     public static String decrypt(String strToDecrypt, String secret) throws Exception {
         initKey(secret);
-        Cipher aesChiper = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-        aesChiper.init(Cipher.DECRYPT_MODE, secretKey);
-        return new String(aesChiper.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
     }
 
     public static void main(String[] args) {
