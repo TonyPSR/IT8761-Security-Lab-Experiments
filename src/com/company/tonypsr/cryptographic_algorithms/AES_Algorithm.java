@@ -12,10 +12,10 @@ public class AES_Algorithm {
     private static byte[] key;
 
     public static void initKey(String myKey) throws Exception {
-        MessageDigest sha = null;
+        MessageDigest md5Code = null;
         key = myKey.getBytes("UTF-8");
-        sha = MessageDigest.getInstance("MD5");
-        key = sha.digest(key);
+        md5Code = MessageDigest.getInstance("MD5");
+        key = md5Code.digest(key);
         key = Arrays.copyOf(key, 16);
         secretKey = new SecretKeySpec(key, "AES");
     }
