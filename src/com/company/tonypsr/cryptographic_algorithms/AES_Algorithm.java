@@ -1,5 +1,6 @@
 package com.company.tonypsr.cryptographic_algorithms;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Base64;
@@ -13,7 +14,7 @@ public class AES_Algorithm {
 
     public static void initKey(String myKey) throws Exception {
         MessageDigest md5Code = null;
-        key = myKey.getBytes("UTF-8");
+        key = myKey.getBytes(StandardCharsets.UTF_8);
         md5Code = MessageDigest.getInstance("MD5");
         key = md5Code.digest(key);
         key = Arrays.copyOf(key, 16);
@@ -24,7 +25,7 @@ public class AES_Algorithm {
         initKey(secret);
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+        return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
     }
 
     public static String decrypt(String strToDecrypt, String secret) throws Exception {
