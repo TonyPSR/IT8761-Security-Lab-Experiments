@@ -42,8 +42,8 @@ public class AES_Algorithm {
 
 
         System.out.println("Enter the message: (A-Z, a-z, 0-9)");
-        String originalString;
-        originalString = sc.nextLine();
+        String message;
+        message = sc.nextLine();
 
         System.out.println("Enter the key: (a-z,A-Z,0-9) (no spacing)");
         String secretKey;
@@ -53,11 +53,13 @@ public class AES_Algorithm {
         String decryptedString = "";
 
         try {
-            encryptedString = encrypt(originalString, secretKey);
+            encryptedString = encrypt(message, secretKey);
             decryptedString = decrypt(encryptedString, secretKey);
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        System.out.println();
 
         System.out.println("CipherText: " + encryptedString);
         System.out.println("PlainText: " + decryptedString);
