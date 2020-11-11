@@ -39,7 +39,7 @@ public class DES_Algorithm {
 
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("\nAES Algorithm\n");
+            System.out.println("\nDES Algorithm\n");
 
 
             System.out.println("Enter the message: (A-Z, a-z, 0-9)");
