@@ -1,6 +1,7 @@
 # IT8761: Security Lab Experiments
 
 ## WORK IN PROGRESS!
+
 ##### Not yet completed.
 
 ### Note: If you are executing the programs separately, remove the first statement in the java file.
@@ -65,10 +66,28 @@ Note: Hill Cipher decryption fails for edge cases in this implementation. Requir
 
 #### DES Algorithm
 
-![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/DES%20Algorithm.png?raw=true)
 
 #### AES Algorithm
 
-![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/AES%20Algorithm.png?raw=true)
 
+## RSA Algorithm Using HTML, CSS & JavaScript
 
+### Sample Outputs
+
+#### Encryption
+
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/RSA%20HTML%20Js%20Encryption.png?raw=true)
+
+#### Decryption
+
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/RSA%20HTML%20Js%20Decryption.png?raw=true)
+
+## Digital Signature Standard (DSS)
+
+### Signature Generation and Verification
+
+#### Sample Output
+
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/Digital%20Signature%20Standard.png?raw=true)
