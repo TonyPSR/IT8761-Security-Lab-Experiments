@@ -40,6 +40,8 @@ public class DigitalSignatureStandard {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("\nDigital Standard Signature\n");
+
         System.out.println("Enter the message");
         String message = sc.next();
 
@@ -48,7 +50,8 @@ public class DigitalSignatureStandard {
             byte[] signature = generateSignature(message.getBytes(), keyPair.getPrivate());
 
             // bytes to hex
-            System.out.println("Signature");
+            System.out.println();
+            System.out.println("Signature Generated:");
             for (byte b : signature) {
                 String hex = String.format("%02x", b);
                 System.out.print(hex);

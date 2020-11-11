@@ -62,3 +62,13 @@ Note: Hill Cipher decryption fails for edge cases in this implementation. Requir
 #### SHA-1 Algorithm
 
 ![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
+
+#### DES Algorithm
+
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
+
+#### AES Algorithm
+
+![Alt text](https://github.com/TonyPSR/IT8761-Security-Lab-Experiments/blob/master/Outputs/SHA1%20Algorithm.png?raw=true)
+
+
