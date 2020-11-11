@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="algorithm.js"></script>
+    <title>RSA Algorithm</title>
+</head>
+<body>
+    <div class="card">
+        <h1>RSA Algorithm</h1>
+        <div class="container">
+            <input type="number" placeholder="Message (0-99999)" id="message"/> <br> 
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+
+        <div class="p-and-q-values">
+            <table>
+                <tr>
+                    <td>
+                        <p>p</p>
+                    </td>
+                    <td>
+                        <input type="number" id="p"/> <br> 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>q</p>
+                    </td>
+                    <td>
+                        <input type="number" id="q"/> <br> 
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <button id="generate-pq-button" onclick="generatePandQ()">Generate new P & Q</button>
+
+        <hr>
+        <h2>Computed Values</h2>
+        <div class="computed-values">
+            <table>
+                <tr>
+                    <td>
+                        <p>n = p*q</p>
+                    </td>
+                    <td>
+                        <input type="number" id="n" disabled/> <br> 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>phi = (p-1)*(q-1)</p>
+                    </td>
+                    <td>
+                        <input type="number" id="phi" disabled/> <br> 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>e</p>
+                    </td>
+                    <td>
+                        <input type="number" id="e" disabled/> <br> 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>d</p>
+                    </td>
+                    <td>
+                        <input type="number" id="d" disabled/> <br> 
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+            <hr>
+            <div class="result">
+                <table>
+                    <tr>
+                        <td>
+                            <h3>Plain Text</h3>
+                        </td>
+                        <td>
+                            <input type="number" id="plain-text" disabled/> <br> 
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h3>Cipher Text</h3>
+                        </td>
+                        <td>
+                            <input type="number" id="cipher-text" disabled/> <br> 
+                        </td>
+                    </tr>
+                </table>   
+            </div> 
+</body>
+</html>

@@ -16,8 +16,7 @@ public class DigitalSignatureStandard {
         return signature.sign();
     }
 
-    public static KeyPair generateRSAKeyPair()
-            throws Exception {
+    public static KeyPair generateRSAKeyPair() throws Exception {
         SecureRandom secureRandom = new SecureRandom();
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(2048, secureRandom);
@@ -45,17 +44,14 @@ public class DigitalSignatureStandard {
         String message = sc.next();
 
         try {
-
             KeyPair keyPair = generateRSAKeyPair();
-
             byte[] signature = generateSignature(message.getBytes(), keyPair.getPrivate());
-
 
             // bytes to hex
             System.out.println("Signature");
             for (byte b : signature) {
-                String st = String.format("%02x", b);
-                System.out.print(st);
+                String hex = String.format("%02x", b);
+                System.out.print(hex);
             }
 
             System.out.println("\n");
