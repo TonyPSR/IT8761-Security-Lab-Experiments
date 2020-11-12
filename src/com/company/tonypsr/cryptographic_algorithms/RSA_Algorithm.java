@@ -45,13 +45,13 @@ public class RSA_Algorithm {
 
 
     public static int gcd(int num1, int num2) {
-        int c;
+        int temp;
         while (true) {
-            c = num1 % num2;
-            if (c == 0)
+            temp = num1 % num2;
+            if (temp == 0)
                 return num2;
             num1 = num2;
-            num2 = c;
+            num2 = temp;
         }
     }
 
