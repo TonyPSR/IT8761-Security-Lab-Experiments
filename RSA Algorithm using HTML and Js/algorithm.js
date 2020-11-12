@@ -54,67 +54,6 @@ function gcd(num1, num2) {
     }
 }
 
-
-function RSA_Algorithm(){
-    console.log("\nRSA Algorithm\n");
-
-    // STEP 1
-    // Two unique random prime numbers
-    // lower bound 98
-    let p = generateNthPrime(Math.floor(Math.random() * 101) + 99);
-    let q = generateNthPrime(Math.floor(Math.random() * 101) + 98);
-    // make sure p and q are not the same
-    while (p === q) {
-        q = generateNthPrime(rand.nextInt(100) + 98);
-    }
-
-    // STEP 2
-    let n = p * q;
-
-    // STEP 3
-    let phi = (p - 1) * (q - 1);
-
-    // STEP 4
-    let e = 2;
-    while (e < phi) {
-        if (gcd(e, phi) === 1)
-            break;
-        else
-            e++;
-    }
-
-    // STEP 5
-    let d = 0;
-    while ((d * e) % phi != 1) {
-        d++;
-    }
-
-    // get the message from the user
-    console.log("Enter the message to send: (0-99999)");
-    let plainText = document.getElementById("message").value;
-
-    console.log();
-
-    console.log("Computed Values:");
-    console.log("p = " + p);
-    console.log("q = " + q);
-    console.log("n = p*q = " + n);
-    console.log("phi = (p-1)*(q-1) = " + phi);
-    console.log();
-    console.log("e = " + e);
-    console.log("d = " + d);
-
-    console.log();
-
-    // encryption {e,n}
-    let cipherText = findExponentialModulo(plainText, e, n);
-    console.log("->Cipher Text {e,n}: " + cipherText);
-
-    // decryption {d,n}
-    let m = findExponentialModulo(cipherText, d, n);
-    console.log("->Plain Text {d,n}: " + m);
-}
-
 function encrypt(){
     if(document.getElementById("message").value == ""){
         alert("Message field can't be blank");
